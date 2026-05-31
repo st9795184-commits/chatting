@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodstuff | ABC Ramen Noodles</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Welcome Minecraft Character -->
+<div id="welcomePopup" class="welcome-popup">
+    <div class="minecraft-char">
+        <div class="mc-head">
+            <div class="mc-face">
+                <div class="mc-eyes"><div class="mc-eye"></div><div class="mc-eye"></div></div>
+                <div class="mc-mouth"></div>
+            </div>
+        </div>
+        <div class="mc-body"></div>
+    </div>
+    <div class="welcome-bubble">
+        <p>🍜 Welcome to Foodstuff - ABC Ramen Noodles! 🍜</p>
+    </div>
+    <button class="close-welcome" onclick="closeWelcome()">✕</button>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo"><i class="fas fa-utensils"></i><span>Foodstuff</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="order.html">Order</a></li>
+            <li><a href="#reservation">Reserve</a></li>
+            <li><a href="#admin">Kitchen</a></li>
+        </ul>
+        <div class="cart-icon" id="cartIcon"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></div>
+        <div class="menu-toggle">☰</div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="moving-title-container">
+            <h1 class="moving-title">🍜 FOODSTUFF - ABC RAMEN NOODLES 🍜</h1>
+        </div>
+        <p class="hero-tagline">Authentic Japanese Ramen • Made with Love • Since 2026</p>
+        <div class="hero-buttons">
+            <a href="menu.html" class="btn-primary">🍜 View Full Menu →</a>
+            <a href="order.html" class="btn-secondary">🛵 Order Online →</a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="container">
+        <h2 class="section-title">Why Choose <span class="highlight">Foodstuff</span></h2>
+        <div class="features-grid">
+            <div class="feature-card"><i class="fas fa-truck-fast"></i><h3>Free Delivery</h3><p>On orders above ₹500</p></div>
+            <div class="feature-card"><i class="fas fa-clock"></i><h3>30 Min Delivery</h3><p>Fast & fresh</p></div>
+            <div class="feature-card"><i class="fas fa-utensils"></i><h3>Authentic Taste</h3><p>Japanese recipes</p></div>
+            <div class="feature-card"><i class="fas fa-shield-alt"></i><h3>Secure Payment</h3><p>Esewa, Khalti, COD</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- Reservation Section -->
+<section id="reservation" class="reservation">
+    <div class="container">
+        <h2 class="section-title">Table <span class="highlight">Reservation</span></h2>
+        <div class="reservation-form">
+            <div class="form-row">
+                <input type="text" id="resName" placeholder="Your Name">
+                <input type="tel" id="resPhone" placeholder="Phone Number">
+            </div>
+            <div class="form-row">
+                <input type="date" id="resDate">
+                <select id="resTime">
+                    <option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option>
+                    <option>6:00 PM</option><option>7:00 PM</option><option>8:00 PM</option>
+                </select>
+                <input type="number" id="resGuests" placeholder="Guests" min="1" max="20">
+            </div>
+            <button id="reserveBtn" class="btn-primary">Book Table</button>
+        </div>
+    </div>
+</section>
+
+<!-- Kitchen Orders Section -->
+<section id="admin" class="admin">
+    <div class="container">
+        <h2 class="section-title">Kitchen <span class="highlight">Orders</span></h2>
+        <div id="adminOrders" class="admin-orders">
+            <div class="loading">Loading orders...</div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section"><h3>Foodstuff</h3><p>ABC Ramen Noodles<br>Authentic Japanese Ramen</p></div>
+            <div class="footer-section"><h3>Hours</h3><p>Mon-Sun: 11:00 AM - 10:00 PM</p></div>
+            <div class="footer-section"><h3>Contact</h3><p>📞 +977 9800000000<br>📍 Kathmandu, Nepal</p></div>
+        </div>
+        <div class="footer-bottom"><p>© 2026 Foodstuff - ABC Ramen Noodles</p></div>
+    </div>
+</footer>
+
+<script>
+    // ========== CART FUNCTIONS ==========
+    let cart = JSON.parse(localStorage.getItem('foodstuffCart') || '[]');
+    
+    function updateCartCount() {
+        const totalItems = cart.reduce((s, i) => s + i.quantity, 0);
+        const cartCounts = document.querySelectorAll('#cartCount');
+        cartCounts.forEach(el => { if (el) el.innerText = totalItems; });
+    }
+    
+    document.getElementById('cartIcon').addEventListener('click', () => {
+        window.location.href = 'order.html';
+    });
+    
+    // ========== RESERVATION ==========
+    async function reserveTable() {
+        const name = document.getElementById('resName')?.value;
+        const phone = document.getElementById('resPhone')?.value;
+        const date = document.getElementById('resDate')?.value;
+        const time = document.getElementById('resTime')?.value;
+        const guests = document.getElementById('resGuests')?.value;
+        
+        if (!name || !phone || !date || !guests) {
+            alert('Please fill all reservation fields!');
+            return;
+        }
+        
+        const response = await fetch('/api/reservations', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ customer_name: name, customer_phone: phone, reservation_date: date, reservation_time: time, guests: parseInt(guests) })
+        });
+        
+        const data = await response.json();
+        if (data.success) {
+            alert(`✅ Table booked! Reservation #${data.reservationId}`);
+            document.getElementById('resName').value = '';
+            document.getElementById('resPhone').value = '';
+            document.getElementById('resDate').value = '';
+            document.getElementById('resGuests').value = '';
+        } else {
+            alert('❌ Reservation failed!');
+        }
+    }
+    
+    // ========== ADMIN ORDERS ==========
+    async function loadAdminOrders() {
+        const container = document.getElementById('adminOrders');
+        if (!container) return;
+        
+        try {
+            const response = await fetch('/api/orders');
+            const orders = await response.json();
+            
+            if (orders.length === 0) {
+                container.innerHTML = '<div class="loading">No orders yet</div>';
+                return;
+            }
+            
+            container.innerHTML = orders.map(order => `
+                <div class="order-card">
+                    <div>
+                        <strong>Order #${order.id}</strong><br>
+                        👤 ${order.customer_name}<br>
+                        📞 ${order.customer_phone}<br>
+                        📍 ${order.customer_address}<br>
+                        🍜 Items: ${JSON.parse(order.items).map(i => `${i.name} x${i.quantity}`).join(', ')}<br>
+                        💰 Total: ₹${order.total_amount}<br>
+                        💳 Payment: ${order.payment_method}<br>
+                        Status: <span class="order-status status-${order.order_status}">${order.order_status}</span>
+                    </div>
+                    <div>
+                        <button onclick="updateOrderStatus(${order.id})" style="background:#00cc66; border:none; padding:8px 15px; border-radius:5px; color:white; cursor:pointer;">✅ Complete Order</button>
+                    </div>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error("Error loading orders:", error);
+            container.innerHTML = '<div class="loading">Error loading orders. Make sure server is running.</div>';
+        }
+    }
+    
+    async function updateOrderStatus(id) {
+        await fetch(`/api/orders/${id}/status`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: 'completed' })
+        });
+        loadAdminOrders();
+        alert('✅ Order marked as completed!');
+    }
+    
+    function closeWelcome() {
+        const popup = document.getElementById('welcomePopup');
+        if (popup) popup.style.display = 'none';
+    }
+    
+    // Event listeners
+    if (document.getElementById('reserveBtn')) {
+        document.getElementById('reserveBtn').addEventListener('click', reserveTable);
+    }
+    if (document.querySelector('.menu-toggle')) {
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    }
+    
+    // Make functions global
+    window.updateOrderStatus = updateOrderStatus;
+    window.closeWelcome = closeWelcome;
+    window.reserveTable = reserveTable;
+    
+    // Initialize
+    updateCartCount();
+    loadAdminOrders();
+    setInterval(loadAdminOrders, 10000);
+</script>
+
+</body>
+</html>
+
+

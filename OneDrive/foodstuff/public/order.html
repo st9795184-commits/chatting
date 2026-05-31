@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order | Foodstuff - ABC Ramen</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo"><i class="fas fa-utensils"></i><span>Foodstuff</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="order.html">Order</a></li>
+            <li><a href="index.html#reservation">Reserve</a></li>
+            <li><a href="index.html#admin">Kitchen</a></li>
+        </ul>
+        <div class="cart-icon" id="cartIcon"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></div>
+        <div class="menu-toggle">☰</div>
+    </div>
+</nav>
+
+<section class="order-page">
+    <div class="container">
+        <h1 class="page-title">Place Your <span class="highlight">Order</span></h1>
+        
+        <div class="order-container">
+            <div class="order-left">
+                <div class="order-form">
+                    <h3>Your Details</h3>
+                    <div class="form-group"><input type="text" id="customerName" placeholder="Full Name *"></div>
+                    <div class="form-group"><input type="tel" id="customerPhone" placeholder="Phone Number *"></div>
+                    <div class="form-group"><textarea id="customerAddress" rows="2" placeholder="Delivery Address *"></textarea></div>
+                </div>
+                
+                <div class="payment-section">
+                    <h3>Select Payment Method</h3>
+                    <div class="payment-methods">
+                        <div class="payment-option selected" onclick="selectPayment('cod')">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Cash on Delivery</span>
+                        </div>
+                        <div class="payment-option" onclick="selectPayment('esewa')">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Esewa_logo.png/200px-Esewa_logo.png" alt="eSewa" style="width:50px; height:auto;" onerror="this.src='https://via.placeholder.com/50x30?text=eSewa'">
+                            <span>eSewa</span>
+                        </div>
+                        <div class="payment-option" onclick="selectPayment('khalti')">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Khalti_logo.png/200px-Khalti_logo.png" alt="Khalti" style="width:50px; height:auto;" onerror="this.src='https://via.placeholder.com/50x30?text=Khalti'">
+                            <span>Khalti</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="selectedPayment" value="cod">
+                </div>
+            </div>
+            
+            <div class="order-right">
+                <div class="order-cart">
+                    <h3>Your Cart <span id="cartCountDisplay">(0 items)</span></h3>
+                    <div id="cartItemsList" class="cart-items-list">
+                        <div class="empty-cart">Your cart is empty. Add items from Menu!</div>
+                    </div>
+                    <div class="cart-total">
+                        <span>Total Amount:</span>
+                        <span id="cartTotalAmount">₹0</span>
+                    </div>
+                    <button id="placeOrderBtn" class="btn-primary btn-block">Proceed to Place Order →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section"><h3>Foodstuff</h3><p>ABC Ramen Noodles</p></div>
+            <div class="footer-section"><h3>Hours</h3><p>Mon-Sun: 11:00 AM - 10:00 PM</p></div>
+            <div class="footer-section"><h3>Contact</h3><p>📞 +977 9800000000<br>📍 Kathmandu, Nepal</p></div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    let cart = JSON.parse(localStorage.getItem('foodstuffCart') || '[]');
+    let selectedPayment = 'cod';
+    
+    function updateCartUI() {
+        const totalItems = cart.reduce((s, i) => s + i.quantity, 0);
+        document.getElementById('cartCount').innerText = totalItems;
+        document.getElementById('cartCountDisplay').innerText = `(${totalItems} items)`;
+        
+        const cartList = document.getElementById('cartItemsList');
+        if (cart.length === 0) {
+            cartList.innerHTML = '<div class="empty-cart">Your cart is empty. Add items from Menu!</div>';
+            document.getElementById('cartTotalAmount').innerText = '₹0';
+            return;
+        }
+        
+        cartList.innerHTML = cart.map((item, idx) => `
+            <div class="cart-item">
+                <div><strong>${item.name}</strong><br>₹${item.price} x ${item.quantity}</div>
+                <div>
+                    <button onclick="updateQty(${idx}, -1)" style="background:#ff4444; border:none; padding:5px 10px; border-radius:5px; color:white;">-</button>
+                    <span style="margin:0 10px;">${item.quantity}</span>
+                    <button onclick="updateQty(${idx}, 1)" style="background:#00cc66; border:none; padding:5px 10px; border-radius:5px; color:white;">+</button>
+                </div>
+            </div>
+        `).join('');
+        
+        const total = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+        document.getElementById('cartTotalAmount').innerText = `₹${total}`;
+    }
+    
+    function updateQty(index, change) {
+        if (cart[index]) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            localStorage.setItem('foodstuffCart', JSON.stringify(cart));
+            updateCartUI();
+        }
+    }
+    
+    function selectPayment(method) {
+        selectedPayment = method;
+        document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+        event.currentTarget.classList.add('selected');
+        document.getElementById('selectedPayment').value = method;
+    }
+    
+    async function placeOrder() {
+        const name = document.getElementById('customerName').value;
+        const phone = document.getElementById('customerPhone').value;
+        const address = document.getElementById('customerAddress').value;
+        const paymentMethod = document.getElementById('selectedPayment').value;
+        
+        if (!name || !phone || !address) {
+            alert('❌ Please fill all details!');
+            return;
+        }
+        
+        if (cart.length === 0) {
+            alert('❌ Your cart is empty!');
+            return;
+        }
+        
+        const total = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+        
+        const response = await fetch('/api/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                customer_name: name,
+                customer_phone: phone,
+                customer_address: address,
+                items: cart,
+                total_amount: total,
+                payment_method: paymentMethod === 'cod' ? 'Cash on Delivery' : (paymentMethod === 'esewa' ? 'eSewa' : 'Khalti')
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            alert(`✅ Order placed! Order #${data.orderId}`);
+            cart = [];
+            localStorage.setItem('foodstuffCart', JSON.stringify(cart));
+            updateCartUI();
+            document.getElementById('customerName').value = '';
+            document.getElementById('customerPhone').value = '';
+            document.getElementById('customerAddress').value = '';
+        } else {
+            alert('❌ Order failed! Try again.');
+        }
+    }
+    
+    document.getElementById('placeOrderBtn').addEventListener('click', placeOrder);
+    document.getElementById('cartIcon').addEventListener('click', () => {
+        window.location.href = 'order.html';
+    });
+    
+    updateCartUI();
+    window.selectPayment = selectPayment;
+    window.updateQty = updateQty;
+</script>
+</body>
+</html>
+

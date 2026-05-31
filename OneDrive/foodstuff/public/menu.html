@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | Foodstuff - Premium Ramen</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Premium Menu Book Styles */
+        .menu-book-page {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 100px 0 60px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .book-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            perspective: 1500px;
+        }
+        
+        .menu-book {
+            position: relative;
+            width: 100%;
+            min-height: 600px;
+            transform-style: preserve-3d;
+        }
+        
+        .book-cover {
+            background: linear-gradient(145deg, #8B4513, #5a2d0c);
+            border-radius: 15px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+            border: 1px solid #d4a574;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .book-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(45deg, rgba(255,215,0,0.05) 0px, rgba(255,215,0,0.05) 2px, transparent 2px, transparent 8px);
+            pointer-events: none;
+        }
+        
+        .book-cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+        
+        .book-cover p {
+            color: #d4a574;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+        }
+        
+        .book-cover .decorative-line {
+            width: 100px;
+            height: 2px;
+            background: #ffd700;
+            margin: 20px auto;
+        }
+        
+        .open-book-btn {
+            background: #ffd700;
+            color: #5a2d0c;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s;
+        }
+        
+        .open-book-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255,215,0,0.3);
+        }
+        
+        /* Book Pages Container */
+        .book-pages {
+            display: none;
+            position: relative;
+            background: #fef5e7;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: bookOpen 0.8s ease-out;
+        }
+        
+        @keyframes bookOpen {
+            from {
+                opacity: 0;
+                transform: scale(0.9) rotateY(-30deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotateY(0);
+            }
+        }
+        
+        .book-pages.active {
+            display: block;
+        }
+        
+        .book-header {
+            background: #8B4513;
+            color: #ffd700;
+            padding: 15px 20px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+        
+        .pages-container {
+            padding: 30px;
+            min-height: 500px;
+        }
+        
+        .page {
+            display: none;
+            animation: pageFade 0.5s ease;
+        }
+        
+        .page.active-page {
+            display: block;
+        }
+        
+        @keyframes pageFade {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #8B4513;
+            border-bottom: 2px solid #ffd700;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .menu-items-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .menu-item-premium {
+            background: rgba(139, 69, 19, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #ffd700;
+            transition: all 0.3s;
+        }
+        
+        .menu-item-premium:hover {
+            transform: translateX(5px);
+            background: rgba(139, 69, 19, 0.1);
+        }
+        
+        .menu-item-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #5a2d0c;
+        }
+        
+        .menu-item-desc {
+            font-size: 0.8rem;
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        .menu-item-price {
+            color: #8B4513;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .menu-item-add {
+            background: #8B4513;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+        
+        .menu-item-add:hover {
+            background: #ffd700;
+            color: #5a2d0c;
+        }
+        
+        .page-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .page-nav button {
+            background: #8B4513;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .page-nav button:hover {
+            background: #ffd700;
+            color: #5a2d0c;
+        }
+        
+        .page-indicator {
+            text-align: center;
+            margin-top: 20px;
+            color: #8B4513;
+            font-weight: bold;
+        }
+        
+        .close-book-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        .close-book-btn:hover {
+            background: #cc0000;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-items-grid {
+                grid-template-columns: 1fr;
+            }
+            .book-cover h1 {
+                font-size: 2rem;
+            }
+            .pages-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo"><i class="fas fa-utensils"></i><span>Foodstuff</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="order.html">Order</a></li>
+            <li><a href="index.html#reservation">Reserve</a></li>
+            <li><a href="index.html#admin">Kitchen</a></li>
+        </ul>
+        <div class="cart-icon" id="cartIcon"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></div>
+        <div class="menu-toggle">☰</div>
+    </div>
+</nav>
+
+<div class="menu-book-page">
+    <div class="book-container">
+        <!-- Book Cover -->
+        <div id="bookCover" class="book-cover">
+            <h1>🍜 Foodstuff</h1>
+            <div class="decorative-line"></div>
+            <p>PREMIUM RAMEN MENU</p>
+            <div class="decorative-line"></div>
+            <p style="font-size: 0.9rem; margin-top: 20px;">Est. 2015</p>
+            <button class="open-book-btn" onclick="openBook()">📖 Open Menu Book</button>
+        </div>
+        
+        <!-- Book Pages -->
+        <div id="bookPages" class="book-pages">
+            <div class="book-header">
+                <i class="fas fa-crown"></i> Foodstuff - Premium Selection <i class="fas fa-crown"></i>
+            </div>
+            <button class="close-book-btn" onclick="closeBook()" style="margin: 15px 0 0 15px;">✕ Close Menu</button>
+            <div class="pages-container" id="pagesContainer">
+                <!-- Pages will be loaded here -->
+            </div>
+            <div class="page-nav">
+                <button id="prevPageBtn" onclick="prevPage()">◀ Previous Page</button>
+                <button id="nextPageBtn" onclick="nextPage()">Next Page ▶</button>
+            </div>
+            <div class="page-indicator" id="pageIndicator"></div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section"><h3>Foodstuff</h3><p>ABC Ramen Noodles<br>Authentic Japanese Ramen</p></div>
+            <div class="footer-section"><h3>Hours</h3><p>Mon-Sun: 11:00 AM - 10:00 PM</p></div>
+            <div class="footer-section"><h3>Contact</h3><p>📞 +977 9800000000<br>📍 Kathmandu, Nepal</p></div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Menu data for book pages
+    const menuPages = [
+        {
+            title: "🍜 SIGNATURE PORK RAMEN",
+            items: [
+                { name: "Tonkotsu Ramen", desc: "Rich pork bone broth, chashu, soft egg, nori", price: 499 },
+                { name: "Tonkotsu Black", desc: "Garlic infused black oil, pork belly", price: 549 },
+                { name: "Spicy Tonkotsu", desc: "Spicy miso blend, ground pork, chili oil", price: 579 }
+            ]
+        },
+        {
+            title: "🐔 CHICKEN & SEAFOOD RAMEN",
+            items: [
+                { name: "Shoyu Ramen", desc: "Soy sauce broth, chicken, bamboo shoots", price: 449 },
+                { name: "Tori Paitan", desc: "Creamy chicken broth, chicken chashu", price: 499 },
+                { name: "Ebi Shrimp Ramen", desc: "Shrimp broth, tiger prawns, seafood", price: 649 }
+            ]
+        },
+        {
+            title: "🥬 VEGETARIAN RAMEN",
+            items: [
+                { name: "Shio Veggie Ramen", desc: "Sea salt broth, seasonal vegetables", price: 399 },
+                { name: "Miso Veggie Ramen", desc: "Savory miso, tofu, corn, mushrooms", price: 429 },
+                { name: "Coconut Curry Ramen", desc: "Creamy coconut curry, crispy tofu", price: 459 }
+            ]
+        },
+        {
+            title: "🌶️ SPICY SPECIALS",
+            items: [
+                { name: "Spicy TanTan", desc: "Sesame spicy broth, ground pork, bok choy", price: 579 },
+                { name: "Red Dragon Ramen", desc: "Ghost pepper broth, spicy ground pork", price: 629 }
+            ]
+        },
+        {
+            title: "🥟 SIDES & APPETIZERS",
+            items: [
+                { name: "Gyoza (6pcs)", desc: "Pan-fried pork dumplings", price: 249 },
+                { name: "Karaage Chicken", desc: "Japanese fried chicken", price: 299 },
+                { name: "Edamame", desc: "Steamed soybeans with sea salt", price: 149 },
+                { name: "Takoyaki", desc: "Octopus balls with sauce", price: 199 }
+            ]
+        }
+    ];
+    
+    let currentPage = 0;
+    let cart = [];
+    
+    function openBook() {
+        document.getElementById('bookCover').style.display = 'none';
+        document.getElementById('bookPages').classList.add('active');
+        renderPages();
+        currentPage = 0;
+        showPage(0);
+    }
+    
+    function closeBook() {
+        document.getElementById('bookCover').style.display = 'block';
+        document.getElementById('bookPages').classList.remove('active');
+    }
+    
+    function renderPages() {
+        const container = document.getElementById('pagesContainer');
+        container.innerHTML = '';
+        
+        menuPages.forEach((page, idx) => {
+            const pageDiv = document.createElement('div');
+            pageDiv.className = 'page';
+            pageDiv.id = `page-${idx}`;
+            
+            let itemsHtml = '';
+            page.items.forEach(item => {
+                itemsHtml += `
+                    <div class="menu-item-premium">
+                        <div class="menu-item-name">${item.name}</div>
+                        <div class="menu-item-desc">${item.desc}</div>
+                        <div class="menu-item-price">₹${item.price}</div>
+                        <button class="menu-item-add" onclick="addToCartFromBook('${item.name}', ${item.price})">Add to Cart 🛒</button>
+                    </div>
+                `;
+            });
+            
+            pageDiv.innerHTML = `
+                <h2 class="page-title">${page.title}</h2>
+                <div class="menu-items-grid">
+                    ${itemsHtml}
+                </div>
+            `;
+            container.appendChild(pageDiv);
+        });
+    }
+    
+    function showPage(index) {
+        for (let i = 0; i < menuPages.length; i++) {
+            const page = document.getElementById(`page-${i}`);
+            if (page) page.classList.remove('active-page');
+        }
+        const currentPageEl = document.getElementById(`page-${index}`);
+        if (currentPageEl) currentPageEl.classList.add('active-page');
+        
+        document.getElementById('pageIndicator').innerText = `Page ${index + 1} of ${menuPages.length}`;
+        
+        const prevBtn = document.getElementById('prevPageBtn');
+        const nextBtn = document.getElementById('nextPageBtn');
+        if (prevBtn) prevBtn.disabled = index === 0;
+        if (nextBtn) nextBtn.disabled = index === menuPages.length - 1;
+    }
+    
+    function prevPage() {
+        if (currentPage > 0) {
+            currentPage--;
+            showPage(currentPage);
+        }
+    }
+    
+    function nextPage() {
+        if (currentPage < menuPages.length - 1) {
+            currentPage++;
+            showPage(currentPage);
+        }
+    }
+    
+    function addToCartFromBook(name, price) {
+        let cart = JSON.parse(localStorage.getItem('foodstuffCart') || '[]');
+        const existing = cart.find(i => i.name === name);
+        if (existing) {
+            existing.quantity++;
+        } else {
+            cart.push({ name: name, price: price, quantity: 1 });
+        }
+        localStorage.setItem('foodstuffCart', JSON.stringify(cart));
+        updateCartCount();
+        showToast(`${name} added to cart!`);
+    }
+    
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('foodstuffCart') || '[]');
+        const totalItems = cart.reduce((s, i) => s + i.quantity, 0);
+        const cartCounts = document.querySelectorAll('#cartCount');
+        cartCounts.forEach(el => { if (el) el.innerText = totalItems; });
+    }
+    
+    function showToast(msg) {
+        const toast = document.createElement('div');
+        toast.innerText = msg;
+        toast.style.cssText = 'position:fixed; bottom:20px; right:20px; background:#ff6b35; color:white; padding:12px 20px; border-radius:8px; z-index:9999;';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+    
+    document.getElementById('cartIcon').addEventListener('click', () => {
+        window.location.href = 'order.html';
+    });
+    
+    updateCartCount();
+</script>
+</body>
+</html>
+
