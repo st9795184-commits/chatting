@@ -12,6 +12,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
+// Serve homepage
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+
 // ========== DATABASE (writable location on Render) ==========
 const db = new sqlite3.Database('/tmp/database.db');
 
