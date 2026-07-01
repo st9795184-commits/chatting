@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Pro — Real-Time Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="login-screen">
+            <div class="login-card">
+                <h1>💬 Chat Pro</h1>
+                <p>Real-time chat with reply & voice</p>
+                <input type="text" id="usernameInput" placeholder="Enter your username..." maxlength="20">
+                <button id="joinBtn">Join Chat →</button>
+            </div>
+        </div>
+
+        <!-- Chat Screen -->
+        <div id="chatScreen" class="chat-screen" style="display:none;">
+            <!-- Header -->
+            <div class="chat-header">
+                <div class="header-left">
+                    <h2>💬 Chat Pro</h2>
+                    <span class="online-count" id="onlineCount">0 online</span>
+                </div>
+                <div class="header-right">
+                    <span id="currentUser">You</span>
+                    <button id="logoutBtn" class="logout-btn">✕</button>
+                </div>
+            </div>
+
+            <!-- Messages Area -->
+            <div class="messages-area" id="messagesArea">
+                <div class="welcome-message">Welcome! Start chatting with friends.</div>
+            </div>
+
+            <!-- Reply Bar -->
+            <div class="reply-bar" id="replyBar" style="display:none;">
+                <div class="reply-content">
+                    <span class="reply-icon">↩️</span>
+                    <span class="reply-text" id="replyText">Replying to...</span>
+                    <button id="cancelReplyBtn" class="cancel-reply">✕</button>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <button id="emojiBtn" class="input-btn">😊</button>
+                <div class="input-wrapper">
+                    <textarea id="messageInput" rows="1" placeholder="Type a message..."></textarea>
+                </div>
+                <button id="voiceBtn" class="input-btn voice-btn">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button id="sendBtn" class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+
+            <!-- Voice Recording Indicator -->
+            <div class="voice-recording" id="voiceRecording" style="display:none;">
+                <div class="recording-indicator">
+                    <span class="recording-dot"></span>
+                    <span>Recording...</span>
+                    <span class="recording-time" id="recordingTime">0s</span>
+                </div>
+                <div class="recording-actions">
+                    <button id="stopRecordingBtn" class="btn-danger">Stop</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
