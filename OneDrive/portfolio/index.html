@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <!-- ===== HEADER / NAV ===== -->
+    <header>
+        <div class="container">
+            <h1 class="logo">MyPortfolio</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#photos">Photos</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#hobbies">Hobbies</a></li>
+                    <li><a href="#goals">Goals</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO SECTION (No Photo, No Scroll Button) ===== -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Hey, I'm <span class="highlight">Sudip Tamang</span></h2>
+                    <p>I build websites that people actually enjoy using. Simple, clean, and functional.</p>
+                    <!-- Changed to Contact Me - actually useful! -->
+                    <a href="#contact" class="btn">Contact Me ↓</a>
+                </div>
+                <!-- Profile photo removed completely -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>I'm a web developer based in <strong>itahari, Nepal</strong>. I love creating websites that solve real problems. I focus on clean design, fast loading, and making sure everything just works.</p>
+                    <p>When I'm not coding, I'm probably reading, thinking about new ideas, or exploring the city.</p>
+                </div>
+                <div class="about-location">
+                    <h3><i class="fas fa-map-pin"></i> Find Me Here</h3>
+                    <div class="map-placeholder">
+                       <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.234567!2d87.274123!3d26.663456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ef6d8c9f5c0b1f%3A0x3c7e8f9d4e6c9a1b!2sChandbela%20Rd%2C%20Itahari%2056705%2C%20Nepal!5e0!3m2!1sen!2snp!4v1700000000000" 
+    width="100%" 
+    height="250" 
+    style="border:0; border-radius: 12px;" 
+    allowfullscreen="" 
+    loading="lazy">
+</iframe>
+                    </div>
+                    <p><i class="fas fa-location-dot"></i> Kathmandu, Nepal</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROJECTS SECTION ===== -->
+<section id="projects">
+    <div class="container">
+        <h2 class="section-title">My Projects</h2>
+        <div class="projects-grid">
+
+            <!-- 1. DENTAL CLINIC -->
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&h=400&fit=crop" alt="Dental Clinic">
+                <div class="project-info">
+                    <h3>🦷 Dental Clinic Site</h3>
+                    <p>Professional dental clinic website with appointments</p>
+                    <a href="https://drjoydentalclinic.com" target="_blank" class="project-link">View Project →</a>
+                </div>
+            </div>
+
+            <!-- 2. CHAT SYSTEM -->
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop" alt="Chat System">
+                <div class="project-info">
+                    <h3>💬 Chat System</h3>
+                    <p>Voice chat, typing animation, join/leave notifications, live user count</p>
+                    <a href="https://one-chat-1j2i.onrender.com" target="_blank" class="project-link">View Project →</a>
+                </div>
+            </div>
+
+            <!-- 3. TIKTOK DOWNLOADER -->
+            <div class="project-card">
+               <img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=600&h=400&fit=crop" alt="TikTok Downloader">
+                <div class="project-info">
+                    <h3>📱 TikTok Video Downloader</h3>
+                    <p>Download TikTok videos without watermark</p>
+                    <a href="https://ttdownloader.tools" target="_blank" class="project-link">View Project →</a>
+                </div>
+            </div>
+
+            <!-- 4. DISEASE PREDICTION -->
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop" alt="Disease Prediction">
+                <div class="project-info">
+                    <h3>🏥 Disease Prediction System</h3>
+                    <p>AI/ML based disease prediction (Hackathon Project)</p>
+                    <a href="#" target="_blank" class="project-link" style="opacity:0.6; cursor:not-allowed;">⚠️ Domain Expired</a>
+                </div>
+            </div>
+
+            <!-- 5. WEATHER FORECAST -->
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1592210454359-9043f067919b?w=600&h=400&fit=crop" alt="Weather Forecast">
+                <div class="project-info">
+                    <h3>🌤️ Weather Forecast</h3>
+                    <p>Real-time weather updates and 7-day forecast</p>
+                    <a href="https://weather.com" target="_blank" class="project-link">View Project →</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+              
+
+    <!-- ===== PHOTOS SECTION (NEW - POLAROID STYLE) ===== -->
+    <section id="photos">
+        <div class="container">
+            <h2 class="section-title">Some Photos of Mine + some additionals😊</h2>
+            <div class="photos-grid">
+                <div class="photo-card">
+                    <img src="https://www.image2url.com/r2/default/images/1783653104652-4cb09323-4186-4596-8b40-591a8aa93d38.jpg" alt="Photo 1">
+                    <p> <strong>After work 😊</strong> </p>
+                </div>
+                <div class="photo-card">
+                    <img src="https://www.image2url.com/r2/default/images/1783657795931-47d7f625-d0f4-4cce-a719-0f8aef47310b.jpg" alt="Photo 2">
+                    <p> <strong>nature🌳</strong></p>
+                </div>
+                <div class="photo-card">
+                    <img src="https://www.image2url.com/r2/default/images/1783653826144-1d485531-1dc5-4d5a-b680-367e5a2b041b.jpg" alt="Photo 3">
+                    <p> <strong>codingXhackthon session</strong> </p>
+                </div>
+                <div class="photo-card">
+                    <img src="https://www.image2url.com/r2/default/images/1783656913177-9a28386e-4516-42bd-8baf-b6beed108de6.jpg" alt="Photo 4">
+                    <p> <strong> just me 😜</strong></p>
+                </div>
+                <div class="photo-card">
+                    <img src="https://www.image2url.com/r2/default/images/1783668995475-5d79a611-e167-45f3-a233-6eef86366c0d.jpg" alt="Photo 5">
+                    <p> <strong>Nighttime gaming</strong></p>
+                </div>
+                <div class="photo-card">
+                    <img src="https://www.image2url.com/r2/default/images/1783669581495-2e6f9fce-3eb8-4f91-ae22-bb9cc54ecaf2.png" alt="Photo 6">
+                    <p> <strong> mini me 👧</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EDUCATION SECTION (NEW - EXACTLY AS YOU ASKED) ===== -->
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-timeline">
+                <div class="edu-item">
+                    <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="edu-content">
+                        <h3>Sushma Godawari College</h3>
+                        <p class="edu-meta">+2 Science (Computer Science) <span>•</span> July 2024 - April 2026</p>
+                    </div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-icon"><i class="fas fa-school"></i></div>
+                    <div class="edu-content">
+                        <h3>koshi st james</h3>
+                        <p class="edu-meta">Secondary Education <span>•</span> June 2020 - March 2024</p>
+                    </div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-icon"><i class="fas fa-book-open"></i></div>
+                    <div class="edu-content">
+                        <h3>JB secondary school</h3>
+                        <p class="edu-meta">Primary Education <span>•</span> June 2012 - March 2020</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOBBIES SECTION ===== -->
+<section id="hobbies">
+    <div class="container">
+        <h2 class="section-title">Things I Love</h2>
+        <div class="hobbies-grid">
+
+            <!-- 1. READING - Video Background -->
+            <div class="hobby-item hobby-reading">
+                <div class="hobby-bg-video">
+                    <!-- Replace with your coding video or GIF -->
+                    <video autoplay loop muted playsinline>
+                        <source src="https://cdn.pixabay.com/video/2021/11/08/93523-642264622_large.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="hobby-content">
+                    <i class="fas fa-code"></i>
+                    <h3>Reading</h3>
+                    <p> <i>upgrading my skills, reading docs & blogs</i></p>
+                </div>
+            </div>
+
+            <!-- 2. MUSIC - Spotify style + Scrolling text -->
+            <div class="hobby-item hobby-music">
+                <div class="music-scroll">
+                    <div class="scroll-text">🎵 Music 🎵 Music 🎵 Music 🎵</div>
+                </div>
+                <div class="hobby-content">
+                    <i class="fas fa-music"></i>
+                    <h3>Music</h3>
+                    <p>Lo-fi & indie vibes</p>
+                </div>
+                <div class="spotify-bar">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+
+            <!-- 3. COOKING - Food Photo -->
+            <div class="hobby-item hobby-cooking">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" alt="Delicious Food">
+                <div class="hobby-content">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Cooking</h3>
+                    <p>Experimenting with new recipes</p>
+                </div>
+            </div>
+
+            <!-- 4. GAMING - Valorant -->
+            <div class="hobby-item hobby-gaming">
+                <div class="gaming-icons">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Valorant_logo_-_pink_color_version.svg" alt="Valorant">
+                </div>
+                <div class="hobby-content">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Gaming</h3>
+                    <p>Valorant</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+    <!-- ===== IDEAS & GOALS ===== -->
+    <section id="goals">
+        <div class="container">
+            <h2 class="section-title">My Ideas & Goals</h2>
+            <div class="goals-grid">
+                <div class="goal-card">
+                    <h3><i class="fas fa-lightbulb"></i> Ideas</h3>
+                    <ul>
+                        <li>Build a recommendation app</li>
+                        <li>Create a local community platform</li>
+                        <li>Form group and work for building startup</li>
+                    </ul>
+                </div>
+                <div class="goal-card">
+                    <h3><i class="fas fa-bullseye"></i> Future Goals</h3>
+                    <ul>
+                        <li>Learn Software development</li>
+                        <li>Start my own tech/Sells company</li>
+                        <li>Travel the world with coding</li>
+                    </ul>
+                </div>
+                <div class="goal-card">
+                    <h3><i class="fas fa-pencil"></i> Design Thinking</h3>
+                    <ul>
+                        <li>User-first approach</li>
+                        <li>Simple and intuitive UI</li>
+                        <li>Always learning new trends</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-content">
+                <p>Have a project in mind? Let's talk!</p>
+                <div class="social-links">
+                    <a href="https://github.com/st9795184-commits" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/sudip-tamang-55581b393?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.facebook.com/share/1Ciba1qmAv/ " target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/st3017746?igsh=MWthMGc0aWd0OXViNQ==" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=st9795184@gmail.com" target="_blank" class="btn"> <strong>EMAIL ME ↘️⬇️↙️</strong></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <p>© 2026 Made with ❤️ by <strong>sudip Tamang</strong></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
